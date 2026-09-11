@@ -1,0 +1,30 @@
+[env]
+LANG = 'en_US.UTF-8'
+LANGUAGE = 'en_US.UTF-8'
+LC_ALL = 'fr_FR.UTF-8'
+
+[tools]
+act = "latest"
+adr-tools = "latest"
+broot = "latest"
+d2 = "latest"
+fzf = "latest"
+gh = "latest"
+k6 = "latest"
+k9s = "latest"
+lazydocker = "latest"
+micro = "latest"
+yt-dlp = "latest"
+
+node = ["latest", "lts"]
+python = "latest"
+poetry = "latest"
+uv = "latest"
+rust = "latest"
+go = "latest"
+packer = "latest"
+terraform = "latest"
+kubectl = "latest"
+krew = "latest"
+java = "latest"
+kotlin = "latest"

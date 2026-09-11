@@ -86,6 +86,7 @@ install-system-all:
 		coreutils \
 		curl \
 		git \
+		locales \
 		make
 
 install-system-tlp:
@@ -114,6 +115,18 @@ install-lib-ubuntu-noble install-lib-ubuntu-resolute:
 		python3-software-properties \
 		software-properties-common
 
+install-shell-all:
+	mkdir -p ${HOME}/.alias.d/
+	touch ${HOME}/.alias.d/optional
+	mkdir -p ${HOME}/.cli.d/
+	touch ${HOME}/.cli.d/optional
+	mkdir -p ${HOME}/.completion.d/
+	touch ${HOME}/.completion.d/optional
+	mkdir -p ${HOME}/.functions.d/
+	touch ${HOME}/.functions.d/optional
+	mkdir -p ${HOME}/.partners.d/
+	touch ${HOME}/.partners.d/optional
+
 install-shell-bash:
 	@echo ====== install-shell-bash ======
 	[ -d ${HOME}/.bash-git-prompt/ ] || git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
@@ -138,7 +151,6 @@ install-cli-all:
 		grep \
 		htop \
 		jq \
-		locales \
 		mmv \
 		net-tools \
 		openssl \
@@ -165,6 +177,7 @@ install-cli-all-debian-trixie install-cli-all-debian-bookworm: ;
 install-cli-mise:
 	@echo ====== install-cli-mise ======
 	curl https://mise.run | sh
+	mkdir -p ${HOME}/.config/mise/
 
 install-cli-mise-all:
 	@echo ====== install-cli-mise-all ======
@@ -225,7 +238,7 @@ install-runtime-go:
 	mise use -g go@latest
 
 install-runtime-java:
-	@echo ====== install-runtime--java ======
+	@echo ====== install-runtime-java ======
 	mise use -g java@latest
 
 install-runtime-kotlin:
@@ -515,8 +528,6 @@ install-app-yaak:
 
 ###### update ######
 
-###### update ######
-
 update-system:
 	@echo ====== update-system ======
 	sudo apt update
@@ -686,36 +697,46 @@ update-app-vscode-insiders:
 
 ###### configure ######
 
-configure-mise:
-	@echo ====== configure-mise ======
-	mkdir -p ${HOME}/.config/mise/
-	ln -sf ${HOME}/.dotfiles/mise/mise.toml ${HOME}/.config/mise/config.toml
+configure-system-all:
+	sudo ln -sf ${HOME}/.dotfiles/system/sysctl.conf /etc/sysctl.conf
+	sudo sysctl --system
 
-configure-locale: configure-locale-${DIST}-${VERSION}
+configure-system-profile:
+	ln -sf ${HOME}/.dotfiles/system/.inputrc ${HOME}/.inputrc
+	ln -sf ${HOME}/.dotfiles/system/.env ${HOME}/.env
+	ln -sf ${HOME}/.dotfiles/system/.profile ${HOME}/.profile
 
-configure-locale-debian-trixie configure-locale-debian-bookworm:
+configure-system-tlp:
+	sudo systemctl enable tlp
+
+configure-system-network:
+	sudo ln -sf ${HOME}/.dotfiles/system/resolv.conf /etc/resolv.conf
+	sudo ln -sf ${HOME}/.dotfiles/system/NetworkManager/conf.d/no-dns.conf /etc/NetworkManager/conf.d/no-dns.conf
+	sudo systemctl restart NetworkManager
+
+configure-system-locale:
+	$(MAKE) configure-system-locale-${DIST}-${VERSION}
+
+configure-system-locale-debian-trixie configure-system-locale-debian-bookworm:
 	@echo ====== configure-locale ======
 	sudo sed -i '/^# *en_US.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
 	sudo sed -i '/^# *fr_FR.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
-
 	sudo locale-gen
-
 	sudo update-locale LANG=en_US.UTF-8
 
-	mise set -g LANG=en_US.UTF-8
-	mise set -g LANGUAGE=en_US.UTF-8
-	mise set -g LC_ALL=fr_FR.UTF-8
-
-configure-locale-ubuntu-noble configure-locale-ubuntu-resolute:
+configure-system-locale-ubuntu-noble configure-system-locale-ubuntu-resolute:
 	@echo ====== configure-locale ======
 	sudo locale-gen en_US.UTF-8
 	sudo locale-gen fr_FR.UTF-8
-
 	sudo update-locale LANG=en_US.UTF-8
 
-	mise set -g LANG=en_US.UTF-8
-	mise set -g LANGUAGE=en_US.UTF-8
-	mise set -g LC_ALL=fr_FR.UTF-8
+configure-shell-all:
+	@echo ====== configure-shell-all ======
+	ln -sf ${HOME}/.dotfiles/shell/.alias ${HOME}/.alias
+	ln -sf ${HOME}/.dotfiles/shell/.cli ${HOME}/.cli
+	ln -sf ${HOME}/.dotfiles/shell/.completions ${HOME}/.completions
+	ln -sf ${HOME}/.dotfiles/shell/.functions ${HOME}/.functions
+	ln -sf ${HOME}/.dotfiles/shell/.partners ${HOME}/.partners
 
 configure-zsh:
 	ln -sf ${HOME}/.dotfiles/zsh/.zprofile ${HOME}/.zprofile

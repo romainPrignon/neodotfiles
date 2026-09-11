@@ -1,0 +1,1 @@
+for file in $HOME/.partners.d/*; do source $file; done

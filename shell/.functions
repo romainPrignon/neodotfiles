@@ -1,0 +1,5 @@
+function coucou() {
+    echo coucou
+}
+
+for file in $HOME/.functions.d/*; do source $file; done
