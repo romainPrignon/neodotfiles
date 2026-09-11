@@ -1,0 +1,2 @@
+# todo mise
+command -v kubectl && complete -o default -F __start_kubectl k

@@ -7,13 +7,13 @@ export PATH := $(HOME)/.local/share/mise/shims:$(HOME)/.local/bin:$(PATH)
 ###### target ######
 bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
-configure: configure-lib configure-shell configure-cli configure-runtime configure-desktop configure-app
+configure: configure-system configure-shell configure-cli configure-runtime configure-desktop configure-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
 install-system: install-system-all install-system-tlp
-install-shell: install-shell-bash install-shell-zsh
+install-shell: install-shell-all install-shell-bash install-shell-zsh
 install-cli: install-cli-all install-cli-mise install-cli-mise-all install-cli-bin install-cli-fzf install-cli-micro install-cli-gh install-cli-ngrok
 install-runtime: install-runtime-c install-runtime-node install-runtime-python install-runtime-rust install-runtime-go install-runtime-java install-runtime-kotlin install-runtime-docker install-runtime-packer install-runtime-terraform install-runtime-kubectl
 install-pkger: install-pkger-pnpm install-pkger-uv install-pkger-poetry install-pkger-krew
@@ -31,7 +31,15 @@ update-pkg: update-pkg-docker update-pkg-node update-pkg-python update-pkg-krew
 update-browser: update-browser-chrome update-browser-brave
 update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode update-app-vscode-insiders
 
-configure-cli: configure-mise configure-locale
+configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-network configure-system-tlp
+configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
+# configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
+configure-cli: configure-cli-mise configure-cli-broot
+configure-runtime: configure-runtime-kubectl
+# configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
+# configure-pkg: ???
+# configure-desktop: ???
+# configure-app: configure-app-vscode configure-app-vscode-insiders
 
 ###### standalone ######
 
@@ -738,11 +746,27 @@ configure-shell-all:
 	ln -sf ${HOME}/.dotfiles/shell/.functions ${HOME}/.functions
 	ln -sf ${HOME}/.dotfiles/shell/.partners ${HOME}/.partners
 
-configure-zsh:
+configure-shell-zsh:
+	@echo ====== configure-shell-zsh ======
 	ln -sf ${HOME}/.dotfiles/zsh/.zprofile ${HOME}/.zprofile
 	ln -sf ${HOME}/.dotfiles/zsh/.zshrc ${HOME}/.zshrc
+	ln -sf ${HOME}/.dotfiles/zsh/.zcli ${HOME}/.zcli
+	ln -sf ${HOME}/.dotfiles/zsh/.zcompletions ${HOME}/.zcompletions
 	yes | cp -rf ${HOME}/.dotfiles/zsh/zsh-git-prompt.sh ${HOME}/.zsh/zsh-git-prompt/zshrc.sh
 	yes | cp -rf ${HOME}/.dotfiles/zsh/gitstatus.py ${HOME}/.zsh/zsh-git-prompt/gitstatus.py
+
+configure-shell-bash:
+	@echo ====== configure-shell-bash ======
+
+configure-cli-mise:
+	@echo ====== configure-cli-mise ======
+	ln -sf ${HOME}/.dotfiles/mise/mise.toml ${HOME}/.config/mise/config.toml
+
+configure-cli-broot:
+	ln -sf ${HOME}/.dotfiles/broot/shell ${HOME}/.cli.d/broot
+
+configure-runtime-kubectl:
+	ln -sf ${HOME}/.dotfiles/kube/completion ${HOME}/.completion.d/kubectl
 
 ###### clean ######
 

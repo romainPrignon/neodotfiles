@@ -1,0 +1,10 @@
+### required cli configs
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# mise
+[ -f ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate zsh)"
+
+### optional cli configs
+for file in $HOME/.cli.d/*; do source $file; done
