@@ -39,6 +39,14 @@ swap:
 checkup:
 	bash ./scripts/checkup.sh
 
+## switch to consumer mode just to use the codebase
+consume:
+	git remote set-url origin https://github.com/romainPrignon/dotfiles.git
+
+## switch to producer mode to contribute to codebase
+produce:
+	git remote set-url origin git@github.com:romainPrignon/dotfiles.git
+
 ###### contribute ######
 
 ## make build dist=ubuntu version=focal
