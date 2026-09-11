@@ -8,7 +8,7 @@ export PATH := $(HOME)/.local/share/mise/shims:$(HOME)/.local/bin:$(PATH)
 bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
 configure: configure-lib configure-shell configure-cli configure-runtime configure-desktop configure-app
-update: update-lib update-shell update-cli update-runtime update-desktop update-app
+update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
@@ -22,6 +22,14 @@ install-browser: install-browser-chrome install-browser-brave
 install-app: install-app-dbgate install-app-rambox install-app-stacer install-app-virtualbox install-app-vlc install-app-vscode install-app-vscode-insiders install-app-insync install-app-yaak
 install-vscode-ext: install-vscode-ext-all install-vscode-ext-node install-vscode-ext-python install-vscode-ext-gh install-vscode-ext-ai
 install-vscode-insiders-ext: install-vscode-insiders-ext-all
+
+update-shell: update-shell-bash update-shell-zsh
+update-cli: update-cli-mise update-cli-bin update-cli-fzf update-cli-micro update-cli-gh
+update-runtime: update-runtime-c update-runtime-node update-runtime-python update-runtime-rust update-runtime-go update-runtime-java update-runtime-kotlin update-runtime-docker update-runtime-packer update-runtime-terraform update-runtime-kubectl
+update-pkger: update-pkger-pnpm update-pkger-uv update-pkger-poetry update-pkger-krew
+update-pkg: update-pkg-docker update-pkg-node update-pkg-python update-pkg-krew
+update-browser: update-browser-chrome update-browser-brave
+update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode update-app-vscode-insiders
 
 configure-cli: configure-mise configure-locale
 
@@ -228,6 +236,7 @@ install-runtime-docker:
 	@echo ====== install-runtime-docker ======
 	curl -sSL https://get.docker.com | sh
 	sudo usermod -aG docker ${USER}
+	newgrp docker
 	sudo apt update
 	sudo apt install -y docker-buildx-plugin docker-compose-plugin
 
@@ -309,8 +318,8 @@ install-desktop-ext:
 		emoji-copy@felipeftn \
 		escape-overview@raelgc \
 		just-perfection-desktop@just-perfection \
-		Lock-screen-background@xiaoguang_wang \
-		start-overlay-in-application-view@hex_cz
+		unlockDialogBackground@sun.wxg@gmail.com \
+		start-overlay-in-application-view@Hex_cz
 
 install-font:
 	@echo ====== install-font ======
@@ -503,6 +512,177 @@ install-app-yaak:
 	@echo ====== install-app-yaak ======
 	curl -fsSL -o ${HOME}/app/yaak.AppImage https://yaak.app/releases/v2026.7.1/linux-x86_64/yaak_2026.7.1_amd64.AppImage
 	chmod a+x ${HOME}/app/yaak.AppImage
+
+###### update ######
+
+###### update ######
+
+update-system:
+	@echo ====== update-system ======
+	sudo apt update
+	sudo apt upgrade -y
+
+update-shell-bash:
+	@echo ====== update-shell-bash ======
+	[ -d ${HOME}/.bash-git-prompt/ ] && git -C ${HOME}/.bash-git-prompt pull --ff-only
+
+update-shell-zsh:
+	@echo ====== update-shell-zsh ======
+	[ -d ${HOME}/.zsh/zsh-autosuggestions/ ] && git -C ${HOME}/.zsh/zsh-autosuggestions pull --ff-only
+	[ -d ${HOME}/.zsh/zsh-syntax-highlighting/ ] && git -C ${HOME}/.zsh/zsh-syntax-highlighting pull --ff-only
+	[ -d ${HOME}/.zsh/zsh-git-prompt/ ] && git -C ${HOME}/.zsh/zsh-git-prompt pull --ff-only
+	[ -d ${HOME}/.zsh/zsh-history-substring-search/ ] && git -C ${HOME}/.zsh/zsh-history-substring-search pull --ff-only
+	[ -d ${HOME}/.zsh/fzf-tab/ ] && git -C ${HOME}/.zsh/fzf-tab pull --ff-only
+
+update-cli-mise:
+	@echo ====== update-cli-mise ======
+	mise self-update -y
+
+update-cli-bin:
+	@echo ====== update-cli-bin ======
+	bin update
+
+update-cli-fzf:
+	mise upgrade fzf
+
+update-cli-micro:
+	mise upgrade micro
+
+update-cli-gh:
+	@echo ====== update-cli-gh ======
+	mise upgrade gh
+
+update-runtime-c:
+	@echo ====== update-runtime-c ======
+	sudo apt update
+	sudo apt install --only-upgrade -y gcc
+
+update-runtime-node:
+	@echo ====== update-runtime-node ======
+	mise upgrade node
+
+update-runtime-python:
+	@echo ====== update-runtime-python ======
+	mise upgrade python
+
+update-runtime-rust:
+	@echo ====== update-runtime-rust ======
+	mise upgrade rust
+
+update-runtime-go:
+	@echo ====== update-runtime-go ======
+	mise upgrade go
+
+update-runtime-java:
+	@echo ====== update-runtime-java ======
+	mise upgrade java
+
+update-runtime-kotlin:
+	@echo ====== update-runtime-kotlin ======
+	mise upgrade kotlin
+
+update-runtime-docker:
+	@echo ====== update-runtime-docker ======
+	curl -sSL https://get.docker.com | sh
+
+update-runtime-packer:
+	@echo ====== update-runtime-packer ======
+	mise upgrade packer
+
+update-runtime-terraform:
+	@echo ====== update-runtime-terraform ======
+	mise upgrade terraform
+
+update-runtime-kubectl:
+	@echo ====== update-runtime-kubectl ======
+	mise upgrade kubectl
+
+update-pkger-pnpm:
+	@echo ====== update-pkger-pnpm ======
+	npm install -g pnpm@latest
+
+update-pkger-uv:
+	@echo ====== update-pkger-uv ======
+	mise upgrade uv
+
+update-pkger-poetry:
+	@echo ====== update-pkger-poetry ======
+	mise upgrade poetry
+
+update-pkger-krew:
+	@echo ====== update-pkger-krew ======
+	mise upgrade krew
+
+update-pkg-docker: install-pkg-docker
+
+update-pkg-node:
+	@echo ====== update-pkg-node ======
+	npm update -g
+
+update-pkg-python:
+	@echo ====== update-pkg-python ======
+	uv tool upgrade --all
+
+update-pkg-krew:
+	@echo ====== update-pkg-krew ======
+	krew update
+	krew upgrade
+
+update-desktop:
+	@echo ====== update-desktop ======
+	$(MAKE) update-desktop-ext
+	$(MAKE) update-gnome-app
+	$(MAKE) update-browser
+
+update-desktop-ext:
+	@echo ====== update-desktop-ext ======
+	gext update
+
+update-gnome-app:
+	@echo ====== update-gnome-app ======
+	sudo apt update
+	sudo apt install --only-upgrade -y \
+		eog \
+		evince \
+		gnome-calculator \
+		gnome-logs \
+		gnome-screenshot \
+		gnome-terminal \
+		gnome-tweaks \
+		krita \
+		nautilus \
+		obs-studio \
+		synaptic
+
+update-browser-chrome:
+	@echo ====== update-browser-chrome ======
+	sudo apt update
+	sudo apt install --only-upgrade -y google-chrome-stable
+
+update-browser-brave:
+	@echo ====== update-browser-brave ======
+	sudo apt update
+	sudo apt install --only-upgrade -y brave-browser
+
+update-app-dbgate: install-app-dbgate
+
+update-app-rambox: install-app-rambox
+
+update-app-vlc:
+	@echo ====== update-app-vlc ======
+	sudo apt update
+	sudo apt install --only-upgrade -y vlc
+
+update-app-vscode:
+	@echo ====== update-app-vscode ======
+	sudo apt update
+	sudo apt install --only-upgrade -y code || $(MAKE) install-app-vscode
+	code --update-extensions
+
+update-app-vscode-insiders:
+	@echo ====== update-app-vscode-insiders ======
+	sudo apt update
+	sudo apt install --only-upgrade -y code-insiders || $(MAKE) install-app-vscode-insiders
 
 ###### configure ######
 
