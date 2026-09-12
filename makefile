@@ -765,7 +765,8 @@ configure-cli-mise:
 	ln -sf ${HOME}/.dotfiles/mise/mise.toml ${HOME}/.config/mise/config.toml
 
 configure-cli-fzf:
-	bash ${HOME}/.fzf/install --key-bindings --completion --no-update-rc
+	fzf --bash > fzf
+	sudo mv fzf /etc/bash_completion.d/fzf
 
 configure-cli-broot:
 	ln -sf ${HOME}/.dotfiles/broot/shell ${HOME}/.cli.d/broot
