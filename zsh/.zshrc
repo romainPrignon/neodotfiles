@@ -98,26 +98,11 @@ bindkey '^u' edit-command-line
 ## always on top
 bindkey -s '^m' '^l^j'
 
-# 2 => `
-if [[ $DISPLAY ]]; then
-  xmodmap -e "keycode 49 = grave"
-fi
-
-# caps_lock => <>
-if [[ $DISPLAY ]]; then
-  xmodmap -e "keycode 66 = less greater"
-fi
-
 # external
 
-if [ -f "$HOME/.zcli" ]; then
-    source "$HOME/.zcli"
-fi
+[ -f $HOME/.cli ] && source $HOME/.cli
 
-if [ -f "$HOME/.zcompletions" ]; then
-    source "$HOME/.zcompletions"
-fi
-
+[ -f $HOME/.completions ] && source $HOME/.completions
 
 # must be at the end
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

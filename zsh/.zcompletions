@@ -3,3 +3,6 @@ if command -v terraform > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C "$(which terraform)" terraform
 fi
+
+### optional completion
+for file in $HOME/.completion.d/*; do source $file; done

@@ -34,7 +34,7 @@ update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode
 configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-network configure-system-tlp
 configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
 # configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
-configure-cli: configure-cli-mise configure-cli-broot
+configure-cli: configure-cli-mise configure-cli-fzf configure-cli-broot
 configure-runtime: configure-runtime-kubectl
 # configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
 # configure-pkg: ???
@@ -757,10 +757,15 @@ configure-shell-zsh:
 
 configure-shell-bash:
 	@echo ====== configure-shell-bash ======
+	ln -sf ${HOME}/.dotfiles/bash/.bashrc ${HOME}/.bashrc
+	ln -sf ${HOME}/.dotfiles/bash/Single_line_Ubuntu_Romain.bgptheme ${HOME}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme # make shell
 
 configure-cli-mise:
 	@echo ====== configure-cli-mise ======
 	ln -sf ${HOME}/.dotfiles/mise/mise.toml ${HOME}/.config/mise/config.toml
+
+configure-cli-fzf:
+	bash ${HOME}/.fzf/install --key-bindings --completion --no-update-rc
 
 configure-cli-broot:
 	ln -sf ${HOME}/.dotfiles/broot/shell ${HOME}/.cli.d/broot
