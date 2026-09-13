@@ -1,5 +1,9 @@
-### optional completion
-for file in $HOME/.completion.d/*; do source $file; done
+### required completion
 
 # terraform => optionel ou pas ?
 [ -x "$(command -v terraform)" ] && complete -C "$(which terraform)" tf
+
+
+### optional completion
+for file in $HOME/.completion.d/*; do source $file; done
+

@@ -758,7 +758,7 @@ configure-shell-zsh:
 configure-shell-bash:
 	@echo ====== configure-shell-bash ======
 	ln -sf ${HOME}/.dotfiles/bash/.bashrc ${HOME}/.bashrc
-	ln -sf ${HOME}/.dotfiles/bash/Single_line_Ubuntu_Romain.bgptheme ${HOME}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme # make shell
+	ln -sf ${HOME}/.dotfiles/bash/Single_line_Ubuntu_Romain.bgptheme ${HOME}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme
 
 configure-cli-mise:
 	@echo ====== configure-cli-mise ======
@@ -772,6 +772,7 @@ configure-cli-broot:
 	ln -sf ${HOME}/.dotfiles/broot/shell ${HOME}/.cli.d/broot
 
 configure-runtime-kubectl:
+	ln -sf ${HOME}/.dotfiles/kube/alias ${HOME}/.alias.d/kubectl
 	ln -sf ${HOME}/.dotfiles/kube/completion ${HOME}/.completion.d/kubectl
 
 ###### clean ######

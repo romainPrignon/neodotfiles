@@ -1,3 +1,51 @@
-alias x=y
+# core
+alias ls="ls --color=auto"
+alias ll="ls -ahlF"
+alias dir="dir --color=auto"
+alias grep="grep --color=auto"
+alias h="history"
+alias mkae="make"
+
+# nav
+alias -- -="cd -"
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias app="cd ~/app"
+alias bin="cd ~/bin"
+alias dl="cd ~/Downloads"
+alias work="cd ~/workspace"
+alias dot="cd ~/.dotfiles"
+
+# dotfiles workflow
+alias dotup="make -C ~/.dotfiles update"
+alias dotconf="make -C ~/.dotfiles configure"
+
+# scripts
+alias standup="sh ~/.dotfiles/scripts/git-standup.sh"
+alias meteo="curl -4 wttr.in/Lyon"
+alias dog="pygmentize -g"
+alias mp3="yt-dlp -x --audio-format mp3 --audio-quality 0"
+alias mp4="yt-dlp -f 22"
+
+# perf
+alias boost="echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference"
+alias chill="echo balance_power | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference"
+
+# git
+alias g="git"
+alias gm="git-machete"
+alias hot="git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
+alias moji="gitmoji -c"
+alias commit="git diff --staged | agy -p 'Generate a commit message. The commit message must be 72 characters long, must not include filenames, must follow gitmoji convention' | git commit -F -"
+
+# docker
+alias dc="docker compose"
+
+# terraform
+alias tf="terraform"
 
 for file in $HOME/.alias.d/*; do source "$file"; done
