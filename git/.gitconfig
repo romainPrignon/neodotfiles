@@ -1,0 +1,133 @@
+[init]
+    defaultBranch = main
+
+[user]
+    name = romainprignon
+    email = pro.rprignon@gmail.com
+	signingkey = B5D18794410CBF8E
+
+[alias]
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
+    st = status
+    cp = cherry-pick
+
+    # Clone
+    cl = clone
+    clr = clone --recursive
+
+    # Checkout
+    co = checkout
+    cob = checkout -b
+
+    # Add
+    ad = add
+    adp = add -p
+    ade = !EDITOR='code --wait' git add -e
+
+    # Commit
+    ci = !oco --yes
+    cim = commit -m
+
+    # Merge
+    mg = merge --log
+    mgf = merge --ff
+    mgnf = merge --log --no-ff
+
+    # Rebase
+    rb = rebase
+    rbi = rebase -i
+    rba = rebase --abort
+    rbc = rebase --continue
+    rbs = rebase --skip
+
+    # Fetch
+    f = fetch
+    fo = fetch origin
+    fu = fetch upstream
+
+    # Pull
+    pl   = pull
+    plo  = pull origin
+    plu  = pull upstream
+
+    plr   = pull --rebase
+    plro  = pull --rebase origin
+    plru  = pull --rebase upstream
+
+    # Push
+    ps   = push
+    pso  = push origin
+    psu  = push upstream
+
+    psf  = push --force-with-lease
+    psfo = push --force-with-lease origin
+    psfu = push --force-with-lease upstream
+
+    # Reset
+    rs   = reset
+    rss  = reset --soft
+    rsh  = reset --hard
+
+    # Log
+    lg = log --oneline --graph --abbrev-commit --decorate
+    lga = log --graph --oneline --abbrev-commit --decorate --all
+
+    # Undo
+    amend = commit --amend
+    uncommit = reset HEAD~
+	unstage = reset HEAD
+
+    # Fixup / Squash
+    fixup = commit --fixup HEAD
+    squash = !GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash
+
+    # standup
+    standup = log --since '1 day ago' --oneline --author pro.rprignon@gmail.com
+
+    # find orphans
+    orphans = fsck --full
+
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+
+[core]
+    excludesfile = ~/.gitignore
+    autocrlf = input
+    pager = git-split-diffs --color | less -RFX
+
+[color "status"]
+    added = bold green
+    changed = bold red
+    untracked = bold cyan
+    unmerged = bold magenta
+
+[rebase]
+    autostash = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+
+[diff]
+    mnemonicPrefix = true
+    tool = vscode
+
+[difftool]
+    prompt = false
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+[includeIf "gitdir:~/workspace/partners/"]
+    path = ~/workspace/partners/.gitconfig

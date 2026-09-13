@@ -767,6 +767,8 @@ configure-shell-bash:
 
 configure-cli-git:
 	@echo ====== configure-cli-git ======
+	ln -sf ${HOME}/.dotfiles/git/.gitconfig ${HOME}/.gitconfig
+	ln -sf ${HOME}/.dotfiles/git/.gitignore ${HOME}/.gitignore
 
 configure-cli-ssh:
 	@echo ====== configure-cli-ssh ======
