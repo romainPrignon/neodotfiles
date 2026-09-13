@@ -1,0 +1,4 @@
+minimumReleaseAge: 4320 # 3 days
+strictDepBuilds: true
+verifyDepsBeforeRun: none # could be true to prevent false positive
+trustLockfile: false # could be true on trusted projects https://pnpm.io/settings#trustlockfile

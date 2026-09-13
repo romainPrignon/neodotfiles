@@ -291,6 +291,7 @@ install-runtime-kubectl:
 install-pkger-pnpm:
 	@echo ====== install-pkger-pnpm ======
 	npm install -g pnpm
+	mkdir -p ${HOME}/.config/pnpm/config.yaml
 
 install-pkger-uv:
 	@echo ====== install-pkger-uv ======
@@ -781,13 +782,13 @@ configure-cli-mise:
 
 configure-cli-fzf:
 	@echo ====== configure-cli-fzf ======
-	fzf --bash > fzf
-	sudo mv fzf /etc/bash_completion.d/fzf
+	fzf --bash > fzf_completion
+	sudo mv fzf_completion /etc/bash_completion.d/fzf
 
 configure-cli-gh:
 	@echo ====== configure-cli-gh ======
-	gh completion -s bash > gh
-	sudo mv gh /etc/bash_completion.d/gh
+	gh completion -s bash > gh_completion
+	sudo mv gh_completion /etc/bash_completion.d/gh
 
 configure-cli-micro:
 	@echo ====== configure-cli-micro ======
@@ -798,26 +799,30 @@ configure-cli-ngrok:
 	ln -sf ~/Gdrive/root/home/romainprignon/.ngrok2 ~/.ngrok2
 
 configure-runtime-kubectl:
-	kubectl completion bash > kubectl
-	sudo mv kubectl /etc/bash_completion.d/kubectl
+	kubectl completion bash > kubectl_completion
+	sudo mv kubectl_completion /etc/bash_completion.d/kubectl
 	ln -sf ${HOME}/.dotfiles/kube/alias ${HOME}/.alias.d/kubectl
 	ln -sf ${HOME}/.dotfiles/kube/completion ${HOME}/.completion.d/kubectl
 
 configure-pkger-npm:
-	npm completion > npm
-	sudo mv npm /etc/bash_completion.d/npm
+	cp ${HOME}/.dotfiles/npm/env ${HOME}/.env.d/npm
+	ln -sf ${HOME}/.dotfiles/npm/.npmrc ${HOME}/.npmrc
+	npm completion > npm_completion
+	sudo mv npm_completion /etc/bash_completion.d/npm
 
 configure-pkger-pnpm:
-	pnpm completion bash > pnpm
-	sudo mv pnpm /etc/bash_completion.d/pnpm
+	ln -sf ${HOME}/.dotfiles/pnpm/config.yaml ${HOME}/.config/pnpm/config.yaml
+	pnpm completion bash > pnpm_completion
+	sudo mv pnpm_completion /etc/bash_completion.d/pnpm
 
 configure-pkger-poetry:
-	poetry completions bash > poetry
-	sudo mv poetry /etc/bash_completion.d/poetry
+	poetry config virtualenvs.in-project true
+	poetry completions bash > poetry_completion
+	sudo mv poetry_completion /etc/bash_completion.d/poetry
 
 configure-pkg-git-machete:
-	git-machete completion bash > git-machete
-	sudo mv git-machete /etc/bash_completion.d/git-machete
+	git-machete completion bash > git-machete_completion
+	sudo mv git-machete_completion /etc/bash_completion.d/git-machete
 
 ###### clean ######
 
