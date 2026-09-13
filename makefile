@@ -33,8 +33,7 @@ update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode
 
 configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-tlp
 configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
-# configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
-configure-cli: configure-cli-mise configure-cli-fzf configure-cli-gh
+configure-cli: configure-cli-git configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-gh configure-cli-micro configure-cli-ngrok
 configure-runtime: configure-runtime-kubectl
 configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
 configure-pkg: configure-pkg-git-machete
@@ -139,6 +138,8 @@ install-lib-ubuntu-noble install-lib-ubuntu-resolute:
 		software-properties-common
 
 install-shell-all:
+	mkdir -p ${HOME}/.env.d/
+	touch ${HOME}/.env.d/optional
 	mkdir -p ${HOME}/.alias.d/
 	touch ${HOME}/.alias.d/optional
 	mkdir -p ${HOME}/.cli.d/
@@ -764,17 +765,33 @@ configure-shell-bash:
 	ln -sf ${HOME}/.dotfiles/bash/.bashrc ${HOME}/.bashrc
 	ln -sf ${HOME}/.dotfiles/bash/Single_line_Ubuntu_Romain.bgptheme ${HOME}/.bash-git-prompt/themes/Single_line_Ubuntu_Romain.bgptheme
 
+configure-cli-git:
+	@echo ====== configure-cli-git ======
+
+configure-cli-ssh:
+	@echo ====== configure-cli-ssh ======
+
 configure-cli-mise:
 	@echo ====== configure-cli-mise ======
 	ln -sf ${HOME}/.dotfiles/mise/mise.toml ${HOME}/.config/mise/config.toml
 
 configure-cli-fzf:
+	@echo ====== configure-cli-fzf ======
 	fzf --bash > fzf
 	sudo mv fzf /etc/bash_completion.d/fzf
 
 configure-cli-gh:
+	@echo ====== configure-cli-gh ======
 	gh completion -s bash > gh
 	sudo mv gh /etc/bash_completion.d/gh
+
+configure-cli-micro:
+	@echo ====== configure-cli-micro ======
+	ln -sf ${HOME}/.dotfiles/micro/env ${HOME}/.env.d/micro
+
+configure-cli-ngrok:
+	@echo ====== configure-cli-ngrok ======
+	ln -sf ~/Gdrive/root/home/romainprignon/.ngrok2 ~/.ngrok2
 
 configure-runtime-kubectl:
 	kubectl completion bash > kubectl
