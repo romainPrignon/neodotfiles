@@ -7,7 +7,7 @@ export PATH := $(HOME)/.local/share/mise/shims:$(HOME)/.local/bin:$(PATH)
 ###### target ######
 bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
-configure: configure-system configure-shell configure-cli configure-runtime configure-desktop configure-app
+configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
@@ -34,10 +34,10 @@ update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode
 configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-network configure-system-tlp
 configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
 # configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
-configure-cli: configure-cli-mise configure-cli-fzf
+configure-cli: configure-cli-mise configure-cli-fzf configure-cli-gh
 configure-runtime: configure-runtime-kubectl
-# configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
-# configure-pkg: ???
+configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
+configure-pkg: configure-pkg-git-machete
 # configure-desktop: ???
 # configure-app: configure-app-vscode configure-app-vscode-insiders
 
@@ -767,9 +767,37 @@ configure-cli-fzf:
 	fzf --bash > fzf
 	sudo mv fzf /etc/bash_completion.d/fzf
 
+configure-cli-gh:
+	gh completion -s bash > gh
+	sudo mv gh /etc/bash_completion.d/gh
+
 configure-runtime-kubectl:
+	kubectl completion bash > kubectl
+	sudo mv kubectl /etc/bash_completion.d/kubectl
 	ln -sf ${HOME}/.dotfiles/kube/alias ${HOME}/.alias.d/kubectl
 	ln -sf ${HOME}/.dotfiles/kube/completion ${HOME}/.completion.d/kubectl
+
+configure-pkger-npm:
+	npm completion > npm
+	sudo mv npm /etc/bash_completion.d/npm
+
+configure-pkger-pnpm:
+	pnpm completion bash > pnpm
+	sudo mv pnpm /etc/bash_completion.d/pnpm
+
+configure-pkger-poetry:
+	poetry completions bash > poetry
+	sudo mv poetry /etc/bash_completion.d/poetry
+
+configure-pkg-git-machete:
+	git-machete completion bash > git-machete
+	sudo mv git-machete /etc/bash_completion.d/git-machete
+
+configure-desktop:
+	sudo apt update && sudo apt install -y libglib2.0-dev-bin
+	curl -fsSL https://raw.githubusercontent.com/PRATAP-KUMAR/ubuntu-gdm-set-background/main/ubuntu-gdm-set-background -o /tmp/ubuntu-gdm-set-background
+	chmod +x /tmp/ubuntu-gdm-set-background
+	sudo /tmp/ubuntu-gdm-set-background --image ${HOME}/.dotfiles/img/screensaver.jpg
 
 ###### clean ######
 
