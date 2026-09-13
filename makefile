@@ -31,7 +31,7 @@ update-pkg: update-pkg-docker update-pkg-node update-pkg-python update-pkg-krew
 update-browser: update-browser-chrome update-browser-brave
 update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode update-app-vscode-insiders
 
-configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-network configure-system-tlp
+configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-tlp
 configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
 # configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
 configure-cli: configure-cli-mise configure-cli-fzf configure-cli-gh
@@ -730,11 +730,6 @@ configure-system-profile:
 
 configure-system-tlp:
 	sudo systemctl enable tlp
-
-configure-system-network:
-	sudo ln -sf ${HOME}/.dotfiles/system/resolv.conf /etc/resolv.conf
-	sudo ln -sf ${HOME}/.dotfiles/system/NetworkManager/conf.d/no-dns.conf /etc/NetworkManager/conf.d/no-dns.conf
-	sudo systemctl restart NetworkManager
 
 configure-system-locale:
 	$(MAKE) configure-system-locale-${DIST}-${VERSION}
