@@ -12,7 +12,7 @@ update: update-system update-shell update-cli update-runtime update-pkger update
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
-install-system: install-system-all install-system-tlp
+install-system: install-system-all install-system-locale install-system-tlp
 install-shell: install-shell-all install-shell-bash install-shell-zsh
 install-cli: install-cli-all install-cli-mise install-cli-mise-all install-cli-bin install-cli-fzf install-cli-micro install-cli-gh install-cli-ngrok
 install-runtime: install-runtime-c install-runtime-node install-runtime-python install-runtime-rust install-runtime-go install-runtime-java install-runtime-kotlin install-runtime-docker install-runtime-packer install-runtime-terraform install-runtime-kubectl
@@ -96,6 +96,21 @@ install-system-all:
 		git \
 		locales \
 		make
+
+install-system-locale:
+	@echo ====== install-system-locale ======
+	sudo apt update
+	sudo apt install -y locales
+	$(MAKE) install-system-locale-${DIST}-${VERSION}
+
+install-system-locale-debian-trixie install-system-locale-debian-bookworm: ;
+	sudo sed -i '/^# *en_US.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
+	sudo sed -i '/^# *fr_FR.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
+	sudo locale-gen
+
+install-system-locale-ubuntu-noble install-system-locale-ubuntu-resolute:
+	sudo locale-gen en_US.UTF-8
+	sudo locale-gen fr_FR.UTF-8
 
 install-system-tlp:
 	@echo ====== install-system-tlp ======
@@ -726,15 +741,10 @@ configure-system-locale:
 
 configure-system-locale-debian-trixie configure-system-locale-debian-bookworm:
 	@echo ====== configure-locale ======
-	sudo sed -i '/^# *en_US.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
-	sudo sed -i '/^# *fr_FR.UTF-8 UTF-8/s/^# *//' /etc/locale.gen
-	sudo locale-gen
 	sudo update-locale LANG=en_US.UTF-8
 
 configure-system-locale-ubuntu-noble configure-system-locale-ubuntu-resolute:
 	@echo ====== configure-locale ======
-	sudo locale-gen en_US.UTF-8
-	sudo locale-gen fr_FR.UTF-8
 	sudo update-locale LANG=en_US.UTF-8
 
 configure-shell-all:
@@ -792,12 +802,6 @@ configure-pkger-poetry:
 configure-pkg-git-machete:
 	git-machete completion bash > git-machete
 	sudo mv git-machete /etc/bash_completion.d/git-machete
-
-configure-desktop:
-	sudo apt update && sudo apt install -y libglib2.0-dev-bin
-	curl -fsSL https://raw.githubusercontent.com/PRATAP-KUMAR/ubuntu-gdm-set-background/main/ubuntu-gdm-set-background -o /tmp/ubuntu-gdm-set-background
-	chmod +x /tmp/ubuntu-gdm-set-background
-	sudo /tmp/ubuntu-gdm-set-background --image ${HOME}/.dotfiles/img/screensaver.jpg
 
 ###### clean ######
 
