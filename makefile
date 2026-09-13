@@ -772,6 +772,8 @@ configure-cli-git:
 
 configure-cli-ssh:
 	@echo ====== configure-cli-ssh ======
+	mkdir -p ${HOME}/.ssh/
+	ln -sf ${HOME}/.dotfiles/ssh/config ${HOME}/.ssh/config
 
 configure-cli-mise:
 	@echo ====== configure-cli-mise ======
