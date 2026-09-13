@@ -6,7 +6,6 @@ LC_ALL = 'fr_FR.UTF-8'
 [tools]
 act = "latest"
 adr-tools = "latest"
-broot = "latest"
 d2 = "latest"
 fzf = "latest"
 gh = "latest"

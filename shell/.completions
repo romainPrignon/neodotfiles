@@ -1,6 +1,5 @@
 ### required completion
 
-# terraform => optionel ou pas ?
 [ -x "$(command -v terraform)" ] && complete -C "$(which terraform)" tf
 
 

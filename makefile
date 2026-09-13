@@ -34,7 +34,7 @@ update-app: update-app-dbgate update-app-rambox update-app-vlc update-app-vscode
 configure-system: configure-system-all configure-system-profile configure-system-locale configure-system-network configure-system-tlp
 configure-shell: configure-shell-all configure-shell-bash configure-shell-zsh
 # configure-cli: configure-cli-ssh configure-cli-mise configure-cli-fzf configure-cli-micro configure-cli-ngrok
-configure-cli: configure-cli-mise configure-cli-fzf configure-cli-broot
+configure-cli: configure-cli-mise configure-cli-fzf
 configure-runtime: configure-runtime-kubectl
 # configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
 # configure-pkg: ???
@@ -191,7 +191,6 @@ install-cli-mise-all:
 	@echo ====== install-cli-mise-all ======
 	mise use -g act@latest
 	mise use -g adr-tools@latest
-	mise use -g broot@latest
 	mise use -g d2@latest
 	mise use -g k6@latest
 	mise use -g k9s@latest
@@ -767,9 +766,6 @@ configure-cli-mise:
 configure-cli-fzf:
 	fzf --bash > fzf
 	sudo mv fzf /etc/bash_completion.d/fzf
-
-configure-cli-broot:
-	ln -sf ${HOME}/.dotfiles/broot/shell ${HOME}/.cli.d/broot
 
 configure-runtime-kubectl:
 	ln -sf ${HOME}/.dotfiles/kube/alias ${HOME}/.alias.d/kubectl
