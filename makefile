@@ -7,8 +7,8 @@ export PATH := $(HOME)/.local/share/mise/shims:$(HOME)/.local/bin:$(PATH)
 ###### target ######
 bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
-configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
+configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
@@ -83,6 +83,7 @@ sync:
 bootstrap-all:
 	mkdir -p ${HOME}/app
 	mkdir -p ${HOME}/bin
+	mkdir -p ${HOME}/workspace
 
 ###### install ######
 
@@ -346,17 +347,19 @@ install-desktop-env:
 	@echo ====== install-desktop-env ======
 	sudo apt update
 	sudo apt install -y gdm3 gnome-shell gnome-shell-extension-manager libfuse2
+	mkdir -p ${HOME}/.config/dconf/
+	mkdir -p ${HOME}/.config/gtk-3.0/
+	mkdir -p ${HOME}/.config/gtk-4.0/
 
 install-desktop-ext:
 	@echo ====== install-desktop-ext ======
-	gext install \
-		AlphabeticalAppGrid@stuarthayhurst \
-		dash-to-panel@jderose9.github.com \
-		emoji-copy@felipeftn \
-		escape-overview@raelgc \
-		just-perfection-desktop@just-perfection \
-		unlockDialogBackground@sun.wxg@gmail.com \
-		start-overlay-in-application-view@Hex_cz
+	bash ./scripts/install-desktop-ext.sh AlphabeticalAppGridstuarthayhurst.v46
+	bash ./scripts/install-desktop-ext.sh dash-to-paneljderose9.github.com.v73
+	bash ./scripts/install-desktop-ext.sh emoji-copyfelipeftn.v38
+	bash ./scripts/install-desktop-ext.sh escape-overviewraelgc.v11
+	bash ./scripts/install-desktop-ext.sh just-perfection-desktopjust-perfection.v37
+	bash ./scripts/install-desktop-ext.sh unlockDialogBackgroundsun.wxggmail.com.v40
+	bash ./scripts/install-desktop-ext.sh start-overlay-in-application-viewHex_cz.v14
 
 install-font:
 	@echo ====== install-font ======
@@ -823,6 +826,26 @@ configure-pkger-poetry:
 configure-pkg-git-machete:
 	git-machete completion bash > git-machete_completion
 	sudo mv git-machete_completion /etc/bash_completion.d/git-machete
+
+configure-desktop:
+	$(MAKE) configure-desktop-env
+	$(MAKE) configure-desktop-ext
+# 		$(MAKE) configure-font
+# 		$(MAKE) configure-gnome-app
+# 		$(MAKE) configure-browser
+
+configure-desktop-env:
+	ln -sf ${HOME}/.dotfiles/gtk/gtk.css ${HOME}/.config/gtk-3.0/gtk.css
+	ln -sf ${HOME}/.dotfiles/gtk/bookmarks ${HOME}/.config/gtk-3.0/bookmarks
+
+configure-desktop-ext:
+	gnome-extensions enable AlphabeticalAppGrid@stuarthayhurst
+	gnome-extensions enable dash-to-panel@jderose9.github.com
+	gnome-extensions enable emoji-copy@felipeftn
+	gnome-extensions enable escape-overview@raelgc
+	gnome-extensions enable just-perfection-desktop@just-perfection
+	gnome-extensions enable unlockDialogBackground@sun.wxg@gmail.com
+	gnome-extensions enable start-overlay-in-application-view@Hex_cz
 
 ###### clean ######
 

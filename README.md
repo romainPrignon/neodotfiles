@@ -34,6 +34,8 @@ export VERSION=trixie
 
 ### 3. Run the Provisioning Pipeline (in order)
 
+- first, clean primary targets to install only what you need
+
 | Step | Command | Description |
 |---|---|---|
 | **0. (Optional)** | `make swap` | Set up swap space (recommended for low RAM / cloud VMs) |
@@ -52,8 +54,10 @@ export VERSION=trixie
 Keep packages and dotfiles up to date:
 
 ```bash
-make update
+make update # (not safe)
 ```
+
+- prefer targeted updates
 
 ## contribute
 
