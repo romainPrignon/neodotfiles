@@ -9,6 +9,8 @@ bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
 configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
+dump: dump-desktop
+load: load-desktop
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
@@ -346,7 +348,7 @@ install-desktop:
 install-desktop-env:
 	@echo ====== install-desktop-env ======
 	sudo apt update
-	sudo apt install -y gdm3 gnome-shell gnome-shell-extension-manager libfuse2
+	sudo apt install -y gdm3 gnome-shell gnome-shell-extension-manager libfuse2 wmctrl
 	mkdir -p ${HOME}/.config/dconf/
 	mkdir -p ${HOME}/.config/gtk-3.0/
 	mkdir -p ${HOME}/.config/gtk-4.0/
@@ -830,7 +832,6 @@ configure-pkg-git-machete:
 configure-desktop:
 	$(MAKE) configure-desktop-env
 	$(MAKE) configure-desktop-ext
-# 		$(MAKE) configure-font
 # 		$(MAKE) configure-gnome-app
 # 		$(MAKE) configure-browser
 
@@ -846,6 +847,27 @@ configure-desktop-ext:
 	gnome-extensions enable just-perfection-desktop@just-perfection
 	gnome-extensions enable unlockDialogBackground@sun.wxg@gmail.com
 	gnome-extensions enable start-overlay-in-application-view@Hex_cz
+
+configure-browser-chrome:
+	google-chrome --app=...
+
+###### dump ######
+
+dump-desktop:
+	dconf dump /org/gnome/nautilus/ > dconf/nautilus.dconf
+	dconf dump /org/gnome/settings-daemon/ > dconf/settings-daemon.dconf
+	dconf dump /org/gnome/shell/ > dconf/shell.dconf
+	dconf dump /org/gnome/terminal/ > dconf/terminal.dconf
+	dconf dump /org/gnome/desktop/ > dconf/desktop.dconf
+
+###### load ######
+
+load-desktop:
+	dconf load /org/gnome/nautilus/ < dconf/nautilus.dconf
+	dconf load /org/gnome/settings-daemon/ < dconf/settings-daemon.dconf
+	dconf load /org/gnome/shell/ < dconf/shell.dconf
+	dconf load /org/gnome/terminal/ < dconf/terminal.dconf
+	dconf load /org/gnome/desktop/ < dconf/desktop.dconf
 
 ###### clean ######
 

@@ -1,0 +1,25 @@
+[interface]
+font-name='Ubuntu 11'
+monospace-font-name='Ubuntu Mono 13'
+show-battery-percentage=true
+enable-animations=false
+clock-show-date=true
+
+[datetime]
+automatic-timezone=true
+
+[input-sources]
+sources=[('xkb', 'fr'), ('xkb', 'us')]
+
+[screensaver]
+lock-delay=uint32 30
+
+[background]
+picture-uri='file:///home/romainprignon/.dotfiles/img/wallpaper.jpg'
+picture-uri-dark='file:///home/romainprignon/.dotfiles/img/wallpaper.jpg'
+
+[wm/preferences]
+num-workspaces=1
+
+[wm/keybindings]
+switch-windows=['<Alt>Tab']

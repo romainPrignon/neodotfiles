@@ -42,6 +42,7 @@ export VERSION=trixie
 | **1. Bootstrap** | `make bootstrap` | Install base build tools and essential utilities |
 | **2. Install** | `make install` | Install all packages and CLI tools for the target OS |
 | **3. Configure** | `make configure` | Apply configurations and create symlinks |
+| **3. Desktop** | `make load-desktop` | Apply Desktop configurations |
 | **4. Checkup** | `make checkup` | Validate that all tools and configs are working properly |
 | **5. (Optional)** | `make produce` | Install additional developer/power-user tools (producer mode) |
 | **6. Reboot** | `sudo reboot` | Reboot system to ensure all shell/group changes take effect |
