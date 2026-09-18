@@ -39,8 +39,8 @@ configure-cli: configure-cli-git configure-cli-ssh configure-cli-mise configure-
 configure-runtime: configure-runtime-kubectl
 configure-pkger: configure-pkger-npm configure-pkger-pnpm configure-pkger-poetry
 configure-pkg: configure-pkg-git-machete
-# configure-desktop: ???
-# configure-app: configure-app-vscode configure-app-vscode-insiders
+configure-browser: configure-browser-chrome configure-browser-brave
+configure-app: configure-app-vscode configure-app-vscode-insiders
 
 ###### standalone ######
 
@@ -482,6 +482,7 @@ install-app-vscode:
 	curl -fsSL -o /tmp/vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
 	sudo dpkg -i /tmp/vscode.deb
 	sudo apt -f -y install
+	mkdir -p ${HOME}/.config/Code/User/
 	$(MAKE) install-vscode-ext
 
 install-vscode-ext-all:
@@ -519,6 +520,7 @@ install-app-vscode-insiders:
 	curl -fsSL -o /tmp/vscode-insiders.deb "https://code.visualstudio.com/sha/download?build=insider&os=linux-deb-x64"
 	sudo dpkg -i /tmp/vscode-insiders.deb
 	sudo apt -f -y install
+	mkdir -p ${HOME}/.config/'Code - Insiders'/User/
 	$(MAKE) install-vscode-insiders-ext
 
 install-vscode-insiders-ext-all:
@@ -832,8 +834,8 @@ configure-pkg-git-machete:
 configure-desktop:
 	$(MAKE) configure-desktop-env
 	$(MAKE) configure-desktop-ext
-# 		$(MAKE) configure-gnome-app
-# 		$(MAKE) configure-browser
+	$(MAKE) configure-browser
+	$(MAKE) configure-app
 
 configure-desktop-env:
 	ln -sf ${HOME}/.dotfiles/gtk/gtk.css ${HOME}/.config/gtk-3.0/gtk.css
@@ -849,7 +851,21 @@ configure-desktop-ext:
 	gnome-extensions enable start-overlay-in-application-view@Hex_cz
 
 configure-browser-chrome:
-	google-chrome --app=...
+	@echo ====== configure-browser-chrome ======
+
+configure-browser-brave:
+	@echo ====== configure-browser-brave ======
+# 	brave-browser --app spotify
+# 	brave-browser --app youtube
+# 	brave-browser --app di
+
+configure-app-vscode:
+	ln -sf ${HOME}/.dotfiles/vscode/settings.json ${HOME}/.config/Code/User/settings.json
+	ln -sf ${HOME}/.dotfiles/vscode/keybindings.json ${HOME}/.config/Code/User/keybindings.json
+
+configure-app-vscode-insiders:
+	ln -sf ${HOME}/.dotfiles/insiders/settings.json ${HOME}/.config/'Code - Insiders'/User/settings.json
+	ln -sf ${HOME}/.dotfiles/insiders/keybindings.json ${HOME}/.config/'Code - Insiders'/User/keybindings.json
 
 ###### dump ######
 

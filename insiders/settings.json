@@ -1,0 +1,166 @@
+{
+    // breadcrumbs
+    "breadcrumbs.enabled": true,
+    // editor
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.smoothScrolling": true,
+    "editor.fastScrollSensitivity": 10,
+    "editor.mouseWheelScrollSensitivity": 3,
+    "editor.minimap.enabled": false,
+    "editor.unicodeHighlight.allowedLocales": {
+        "_os": true,
+        "_vscode": true
+    },
+    // editor font
+    "editor.fontFamily": "'DejaVu Sans Mono', 'Droid Sans Mono'",
+    // "editor.fontFamily": "Consolas, 'Courier New', monospace", // windows
+    "editor.fontSize": 14.5, // might be 16 on windows
+    "editor.lineHeight": 22, // might be off on windows
+    // editor format
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    // editor indent
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 160,
+    "editor.rulers": [
+        160
+    ],
+    "editor.stickyScroll.enabled": true,
+    "editor.stickyScroll.maxLineCount": 2,
+    "explorer.openEditors.visible": 0,
+    //files
+    "files.autoSave": "onFocusChange",
+    "files.defaultLanguage": "markdown",
+    // workbench and windows
+    "terminal.integrated.defaultLocation": "editor",
+    "window.customMenuBarAltFocus": false,
+    "window.zoomLevel": 0.6, // might be off on windows
+    // workbench
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "workbench.activityBar.location": "hidden",
+    // workbench editor
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.pinnedTabSizing": "compact",
+    "workbench.editor.tabCloseButton": "off",
+    "workbench.editor.tabActionCloseVisibility": false,
+    // workbench editor preview
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.enablePreviewFromCodeNavigation": false,
+    // workbench history
+    "workbench.localHistory.enabled": true,
+    // workbench tree
+    "workbench.tree.indent": 16,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.list.defaultFindMode": "filter",
+    // term
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.shellIntegration.enabled": false,
+    "terminal.integrated.tabs.defaultIcon": "terminal",
+    "terminal.integrated.tabs.title": "${sequence}",
+    "terminal.integrated.fontFamily": "Ubuntu Mono",
+    "terminal.integrated.fontSize": 18,
+    //"terminal.integrated.lineHeight": 1, (no need)
+    //"terminal.integrated.letterSpacing": 1, (no need)
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.sendKeybindingsToShell": false,
+    // misc
+    "security.workspace.trust.untrustedFiles": "open",
+    "extensions.ignoreRecommendations": true,
+    "telemetry.telemetryLevel": "off",
+    // markdown
+    "markdown.preview.breaks": true,
+    "[markdown]": {
+        "editor.wordBasedSuggestions": "matchingDocuments",
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    // extensions
+    "material-icon-theme.hidesExplorerArrows": true,
+    "foam.completion.label": "title",
+    "foam.logging.level": "off",
+    // themes
+    "workbench.colorCustomizations": {
+        "[Solarized Light]": {
+            "activityBar.background": "#D7D7D7",
+            "editorWarning.foreground": "#FFFF00",
+            "editorError.foreground": "#FF0000",
+            "editor.foreground": "#333333",
+            "editor.background": "#F7F7F2",
+            "editor.selectionBackground": "#BED2D3",
+            "editor.selectionHighlightBackground": "#D1CFC2",
+            "editor.wordHighlightBackground": "#F1EBDC",
+            "editor.wordHighlightStrongBackground": "#EEE8D5",
+            "editorCursor.foreground": "#AF671B",
+            "editorIndentGuide.background": "#90909075",
+            "editorLineNumber.foreground": "#909090",
+            "editorLineNumber.activeForeground": "#606060",
+            "editorGroupHeader.tabsBackground": "#EEE8D5",
+            "editorOverviewRuler.addedForeground": "#81b88b",
+            "editorOverviewRuler.modifiedForeground": "#66AFE0",
+            "editorOverviewRuler.deletedForeground": "#CA4B51",
+            "editorOverviewRuler.errorForeground": "#FF0000",
+            "editorOverviewRuler.warningForeground": "#FFFF00",
+            "editorOverviewRuler.bracketMatchForeground": "#F8F8F2",
+            "list.focusBackground": "#B7B7B7",
+            "list.hoverBackground": "#B7B7B7",
+            "list.activeSelectionBackground": "#B7B7B7",
+            "list.inactiveFocusBackground": "#D7D7D7",
+            "list.inactiveSelectionBackground": "#D7D7D7",
+            "peekViewEditor.background": "#D7D7D7",
+            "scrollbarSlider.background": "#60606025",
+            "sideBar.background": "#D7D7D7",
+            "sideBar.border": "#D7D7D7",
+            "sideBar.foreground": "#272822",
+            "statusBar.background": "#D7D7D7",
+            "statusBar.foreground": "#272822",
+            "tab.activeBackground": "#B7B7B7",
+            "tab.activeBorder": "#272822",
+            "tab.activeForeground": "#272822",
+            "tab.inactiveBackground": "#D7D7D7",
+            "tab.inactiveForeground": "#272822"
+        },
+        "[Monokai]": {
+            "activityBar.background": "#313437",
+            "editor.background": "#272825", // #272822 cause rendering bug
+            "editorCursor.foreground": "#FFA500",
+            "editorWarning.foreground": "#FFFF00",
+            "editorError.foreground": "#FF0000",
+            "editorIndentGuide.background": "#60606075",
+            "editorOverviewRuler.addedForeground": "#587c0c",
+            "editorOverviewRuler.deletedForeground": "#94151B",
+            "editorOverviewRuler.errorForeground": "#FF0000",
+            "editorOverviewRuler.warningForeground": "#FFFF00",
+            "editorOverviewRuler.bracketMatchForeground": "#272822",
+            "list.focusBackground": "#4C4F53",
+            "list.hoverBackground": "#4C4F53",
+            "list.activeSelectionBackground": "#4C4F53",
+            "list.inactiveFocusBackground": "#313437",
+            "list.inactiveSelectionBackground": "#313437",
+            "peekViewEditor.background": "#313437",
+            "scrollbarSlider.background": "#FFFFFF25",
+            "sideBar.background": "#313437",
+            "sideBar.border": "#313437",
+            "sideBar.foreground": "#F8F8F2",
+            "statusBar.background": "#313437",
+            "statusBar.foreground": "#F8F8F2",
+            "tab.activeBackground": "#4C4F53",
+            "tab.activeBorder": "#EDEDED",
+            "tab.activeForeground": "#F8F8F2",
+            "tab.inactiveBackground": "#313437",
+            "tab.inactiveForeground": "#F8F8F2"
+        }
+    },
+    "window.menuBarVisibility": "compact",
+    "window.commandCenter": false,
+    "window.customTitleBarVisibility": "never",
+    "window.titleBarStyle": "native"
+}

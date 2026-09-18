@@ -48,6 +48,15 @@ export VERSION=trixie
 | **6. Reboot** | `sudo reboot` | Reboot system to ensure all shell/group changes take effect |
 | **7. Clean** | `make clean` | Clean up package caches and temporary install artifacts |
 
+## Manual work
+
+### webapp
+- go to chrome://apps/ or brave://apps/
+- install shortcuts:
+    - devdocs
+    - spotify
+    - youtube
+
 ---
 
 ## 🔄 Routine Maintenance
