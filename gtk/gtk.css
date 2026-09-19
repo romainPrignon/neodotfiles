@@ -1,3 +1,18 @@
+/* remove the heavy titlebar on gnome terminal */
+terminal-window headerbar *,
+terminal-window .titlebar {
+    background-image: none;
+    background-color: transparent;
+    margin-top: -100px;
+    border: none;
+}
+
+/* remove rounded corners */
+terminal-window decoration {
+    border-radius: 0px 0px 0px 0px
+}
+
+/* give some space inside terminal for prompt */
 vte-terminal {
     padding: 10px 20px 20px 20px;
 }

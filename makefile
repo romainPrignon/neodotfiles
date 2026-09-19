@@ -839,6 +839,7 @@ configure-desktop:
 
 configure-desktop-env:
 	ln -sf ${HOME}/.dotfiles/gtk/gtk.css ${HOME}/.config/gtk-3.0/gtk.css
+	ln -sf ${HOME}/.dotfiles/gtk/gtk.css ${HOME}/.config/gtk-4.0/gtk.css
 	ln -sf ${HOME}/.dotfiles/gtk/bookmarks ${HOME}/.config/gtk-3.0/bookmarks
 
 configure-desktop-ext:
