@@ -298,9 +298,9 @@ install-runtime-docker:
 	@echo ====== install-runtime-docker ======
 	curl -sSL https://get.docker.com | sh
 	sudo usermod -aG docker ${USER}
-	newgrp docker
 	sudo apt update
 	sudo apt install -y docker-buildx-plugin docker-compose-plugin
+	newgrp docker
 
 install-runtime-packer:
 	@echo ====== install-runtime-packer ======
@@ -317,7 +317,7 @@ install-runtime-kubectl:
 install-pkger-pnpm:
 	@echo ====== install-pkger-pnpm ======
 	npm install -g pnpm
-	mkdir -p ${HOME}/.config/pnpm/config.yaml
+	mkdir -p ${HOME}/.config/pnpm/
 
 install-pkger-uv:
 	@echo ====== install-pkger-uv ======
@@ -482,7 +482,7 @@ install-app-virtualbox-debian-bookworm:
 install-app-virtualbox-ubuntu-noble:
 	sudo apt update
 	sudo apt install -y linux-headers-generic
-	sudo apt install libqt6core6t64 libqt6widgets6 libqt6gui6 libqt6dbus6 libqt6help6 libqt6printsupport6 libqt6statemachine6 libqt6xml6
+	sudo apt install -y libqt6core6t64 libqt6widgets6 libqt6gui6 libqt6dbus6 libqt6help6 libqt6printsupport6 libqt6statemachine6 libqt6xml6
 	curl -fsSL -o /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.2.16/virtualbox-7.2_7.2.16-174877~Ubuntu~noble_amd64.deb
 	sudo dpkg -i /tmp/virtualbox.deb
 	sudo apt -f -y install
@@ -490,7 +490,7 @@ install-app-virtualbox-ubuntu-noble:
 install-app-virtualbox-ubuntu-resolute:
 	sudo apt update
 	sudo apt install -y linux-headers-generic
-	sudo apt install libqt6core6 libqt6widgets6 libqt6gui6 libqt6dbus6 libqt6help6 libqt6printsupport6 libqt6statemachine6 libqt6xml6
+	sudo apt install -y libqt6core6 libqt6widgets6 libqt6gui6 libqt6dbus6 libqt6help6 libqt6printsupport6 libqt6statemachine6 libqt6xml6
 	curl -fsSL -o /tmp/virtualbox.deb https://download.virtualbox.org/virtualbox/7.2.16/virtualbox-7.2_7.2.16-174877~Ubuntu~resolute_amd64.deb
 	sudo dpkg -i /tmp/virtualbox.deb
 	sudo apt -f -y install
@@ -547,6 +547,7 @@ install-app-vscode-insiders:
 	$(MAKE) install-vscode-insiders-ext
 
 install-vscode-insiders-ext-all:
+	code-insiders --install-extension ctf0.macros
 	code-insiders --install-extension foam.foam-vscode
 	code-insiders --install-extension mushan.vscode-paste-image
 	code-insiders --install-extension PKief.material-icon-theme

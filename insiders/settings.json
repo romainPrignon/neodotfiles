@@ -32,10 +32,12 @@
     //files
     "files.autoSave": "onFocusChange",
     "files.defaultLanguage": "markdown",
-    // workbench and windows
-    "terminal.integrated.defaultLocation": "editor",
-    "window.customMenuBarAltFocus": false,
+    // windows
     "window.zoomLevel": 0.6, // might be off on windows
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "window.menuBarVisibility": "toggle",
+    "window.commandCenter": false,
     // workbench
     "workbench.colorTheme": "Solarized Light",
     "workbench.iconTheme": "material-icon-theme",
@@ -57,18 +59,6 @@
     "workbench.tree.indent": 16,
     "workbench.tree.renderIndentGuides": "always",
     "workbench.list.defaultFindMode": "filter",
-    // term
-    "terminal.integrated.gpuAcceleration": "on",
-    "terminal.integrated.shellIntegration.enabled": false,
-    "terminal.integrated.tabs.defaultIcon": "terminal",
-    "terminal.integrated.tabs.title": "${sequence}",
-    "terminal.integrated.fontFamily": "Ubuntu Mono",
-    "terminal.integrated.fontSize": 18,
-    //"terminal.integrated.lineHeight": 1, (no need)
-    //"terminal.integrated.letterSpacing": 1, (no need)
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorStyle": "line",
-    "terminal.integrated.sendKeybindingsToShell": false,
     // misc
     "security.workspace.trust.untrustedFiles": "open",
     "extensions.ignoreRecommendations": true,
@@ -87,6 +77,45 @@
     "material-icon-theme.hidesExplorerArrows": true,
     "foam.completion.label": "title",
     "foam.logging.level": "off",
+    // macros
+    "macros.list": {
+        "vibeCommit": [
+            "git.stageAllTracked",
+            "git.stageAllUntracked",
+            "github.copilot.git.generateCommitMessage",
+            {
+                "command": "$delay",
+                "args": {
+                    "delay": 500
+                }
+            },
+            "git.commit"
+        ],
+        "copilotTabOpen": [
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.chat.openask"
+        ],
+        "copilotTabClose": [
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.toggleAuxiliaryBar"
+        ],
+        "copilotAgentTabOpen": [
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.chat.openagent"
+        ],
+        "copilotAgentTabClose": [
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.toggleAuxiliaryBar"
+        ],
+        "copilotThinkTabOpen": [ // Plan mode
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.chat.openPlan"
+        ],
+        "copilotThinkTabClose": [ // Plan mode
+            "workbench.action.toggleSidebarVisibility",
+            "workbench.action.toggleAuxiliaryBar"
+        ],
+    },
     // themes
     "workbench.colorCustomizations": {
         "[Solarized Light]": {
@@ -158,9 +187,5 @@
             "tab.inactiveBackground": "#313437",
             "tab.inactiveForeground": "#F8F8F2"
         }
-    },
-    "window.menuBarVisibility": "compact",
-    "window.commandCenter": false,
-    "window.customTitleBarVisibility": "never",
-    "window.titleBarStyle": "native"
+    }
 }

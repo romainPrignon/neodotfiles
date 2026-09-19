@@ -206,12 +206,6 @@
         "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "python.analysis.typeCheckingMode": "strict",
-    // "python.linting.enabled": true, TODO: remove
-    // "python.linting.pylintEnabled": false, TODO: remove
-    // "python.linting.flake8Enabled": true, TODO: remove
-    // "python.linting.mypyEnabled": true, TODO: remove
-    // PHP
-    "php.suggest.basic": false, // PHP IntelliSense
     // markdown
     "[markdown]": {
         "editor.wordBasedSuggestions": "matchingDocuments",
@@ -294,7 +288,6 @@
         ]
     },
     "material-icon-theme.hidesExplorerArrows": true,
-    "phpcs.standard": "PSR2",
     "dev.containers.defaultExtensions": [
         "EditorConfig.EditorConfig",
         "ctf0.macros",
@@ -303,8 +296,8 @@
         "yatki.vscode-surround"
     ],
     // either use a project specific dotfiles or make a subset for vscode
-    // "dotfiles.repository": "romainprignon/dotfiles",
-    // "dotfiles.installCommand": "bash ./scripts/install.sh && bash ./scripts/configure.sh",
+    "dotfiles.repository": "romainprignon/dotfiles",
+    "dotfiles.installCommand": "make install-shell-all install-shell-bash configure-shell-all configure-shell-bash",
     "surround.custom": {
         "log": {
             "label": "log",
@@ -335,9 +328,6 @@
     "github.copilot.nextEditSuggestions.enabled": false,
     "github.copilot.chat.codesearch.enabled": true,
     "github.copilot.chat.githubMcpServer.enabled": true,
-    // copilot - models
-    "inlineChat.defaultModel": "Claude Sonnet 4.5 (anthropic)",
-    "chat.planAgent.defaultModel": "Claude Haiku 4.5 (copilot)",
     // copilot - style
     "chat.tips.enabled": false,
     "chat.viewSessions.orientation": "stacked",
@@ -792,13 +782,5 @@
     },
     // a retester plus tard
     "terminal.integrated.suggest.enabled": false,
-    "yaml.disableSchemaDetection": [
-        "**/.github/workflows/*.yml",
-        "**/.github/workflows/*.yaml",
-        "**/.gitea/workflows/*.yml",
-        "**/.gitea/workflows/*.yaml",
-        "**/.forgejo/workflows/*.yml",
-        "**/.forgejo/workflows/*.yaml"
-    ],
     // ranger
 }
