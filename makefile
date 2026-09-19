@@ -8,7 +8,7 @@ export PATH := $(HOME)/.local/share/mise/shims:$(HOME)/.local/bin:$(PATH)
 bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
-configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
+configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app configure-partner
 dump: dump-desktop dump-apt
 load: load-desktop load-apt
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
@@ -64,6 +64,11 @@ consume:
 produce:
 	git remote set-url origin git@github.com:romainPrignon/dotfiles.git
 
+## link partner config file ex: make partner partner=...
+partner:
+	ln -sfn ~/Gdrive/root/home/romainprignon/.rc/${partner} ~/.partners.d/${partner}
+	ln -sfn ~/Gdrive/root/home/romainprignon/.ssh/${partner} ~/.ssh/${partner}
+
 ###### contribute ######
 
 ## make build dist=ubuntu version=focal
@@ -86,6 +91,8 @@ bootstrap-all:
 	mkdir -p ${HOME}/app
 	mkdir -p ${HOME}/bin
 	mkdir -p ${HOME}/workspace
+	mkdir -p ${HOME}/workspace/romainprignon
+	mkdir -p ${HOME}/workspace/partners
 
 ###### install ######
 
@@ -867,6 +874,9 @@ configure-app-vscode:
 configure-app-vscode-insiders:
 	ln -sf ${HOME}/.dotfiles/insiders/settings.json ${HOME}/.config/'Code - Insiders'/User/settings.json
 	ln -sf ${HOME}/.dotfiles/insiders/keybindings.json ${HOME}/.config/'Code - Insiders'/User/keybindings.json
+
+configure-partner:
+	ln -sf ~/Gdrive/root/home/romainprignon/workspace/partners/.gitconfig ${HOME}/workspace/partners/.gitconfig
 
 ###### dump ######
 
