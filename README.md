@@ -57,6 +57,13 @@ export VERSION=trixie
     - spotify
     - youtube
 
+## insync
+- launch and configure
+
+## gitmoji
+```bash
+gitmoji -g
+```
 ---
 
 ## 🔄 Routine Maintenance
@@ -68,6 +75,13 @@ make update # (not safe)
 ```
 
 - prefer targeted updates
+
+## troubleshooting
+
+### scaling issue
+- either use gnome on xorg at login
+- use wayland but use large resolution and scale down
+
 
 ## contribute
 
