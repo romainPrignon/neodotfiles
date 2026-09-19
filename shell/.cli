@@ -3,6 +3,9 @@
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# ctrl+e
+[ -f ~/.fzf.bash ] && bind '"\C-e": __fzf_select__'
+
 # mise
 [ -f ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate bash)"
 

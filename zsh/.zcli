@@ -3,6 +3,9 @@
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# ctrl+e
+[ -f ~/.fzf.zsh ] && bindkey '^E' fzf-file-widget
+
 # mise
 [ -f ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate zsh)"
 
