@@ -1,4 +1,5 @@
 .env
+apt/
 !system/.env
 logs/
 !logs/.gitkeep

@@ -9,8 +9,8 @@ bootstrap: bootstrap-all
 install: install-system install-lib install-shell install-cli install-runtime install-pkger install-pkg install-desktop install-app
 update: update-system update-shell update-cli update-runtime update-pkger update-pkg update-desktop update-app
 configure: configure-system configure-shell configure-cli configure-runtime configure-pkger configure-pkg configure-desktop configure-app
-dump: dump-desktop
-load: load-desktop
+dump: dump-desktop dump-apt
+load: load-desktop load-apt
 clean: clean-apt clean-docker clean-log clean-mise clean-pkg-node clean-pkg-python
 purge: purge-mise
 
@@ -877,6 +877,11 @@ dump-desktop:
 	dconf dump /org/gnome/terminal/ > dconf/terminal.dconf
 	dconf dump /org/gnome/desktop/ > dconf/desktop.dconf
 
+dump-apt:
+	@echo ====== dump-apt ======
+	cp -f /etc/apt/sources.list apt/sources.list
+	cp -rf /etc/apt/sources.list.d/. apt/sources.list.d/
+
 ###### load ######
 
 load-desktop:
@@ -885,6 +890,11 @@ load-desktop:
 	dconf load /org/gnome/shell/ < dconf/shell.dconf
 	dconf load /org/gnome/terminal/ < dconf/terminal.dconf
 	dconf load /org/gnome/desktop/ < dconf/desktop.dconf
+
+load-apt:
+	@echo ====== load-apt ======
+	sudo cp -f apt/sources.list /etc/apt/sources.list
+	sudo cp -rf apt/sources.list.d/. /etc/apt/sources.list.d/
 
 ###### clean ######
 
