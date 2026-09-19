@@ -52,6 +52,22 @@ swap:
 	sudo swapon /swapfile
 	echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
+## configure grub bootloader
+grub:
+	sudo sed -i 's/^GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/' /etc/default/grub
+	sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/' /etc/default/grub
+	sudo sed -i 's/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="nosplash"/' /etc/default/grub
+	sudo update-grub
+
+## set timezone ex: make timezone tz=Europe/Paris
+timezone:
+	sudo timedatectl set-timezone ${tz}
+
+## set hostname ex: make hostname name=my-hostname
+hostname:
+	sudo hostnamectl set-hostname ${name}
+	sudo sed -i 's/127\.0\.1\.1.*/127.0.1.1\t${name}/' /etc/hosts
+
 ## run a checkup after install or configure to make sure everything works
 checkup:
 	bash ./scripts/checkup.sh
