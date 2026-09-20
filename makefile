@@ -395,7 +395,11 @@ install-font:
 		fonts-dejavu \
 		fonts-droid-fallback \
 		fonts-inconsolata \
+		fonts-jetbrains-mono \
 		fonts-liberation \
+		fonts-noto \
+		fonts-roboto \
+		fonts-symbola \
 		fonts-ubuntu
 	$(MAKE) install-font-${DIST}-${VERSION}
 
