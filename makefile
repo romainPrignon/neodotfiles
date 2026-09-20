@@ -355,6 +355,7 @@ install-pkg-python:
 	uv tool install --force git-machete
 	uv tool install --force gnome-extensions-cli
 	uv tool install --force Pygments
+	uv tool install --force pyinfra
 
 install-pkg-krew:
 	[ -x "$$(command -v kubectl-ctx)" ] || krew install ctx
