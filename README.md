@@ -1,88 +1,74 @@
 # dotfiles
 
-> personal dotfiles
+Personal workstation provisioning and dotfiles.
 
 ## dependencies
- - curl
- - git
- - make
 
-## makefile guidelines
-if a component is optional/need pinned version/need config => do a dedicated make target, put in `-all` target otherwise
+- `curl`
+- `git`
+- `make`
 
-## 🚀 Quickstart (New Machine / Fresh Install)
+## guidelines
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/romainPrignon/neodotfiles.git ~/workspace/romainprignon/neodotfiles
-cd ~/workspace/romainprignon/neodotfiles
-```
+- Create dedicated targets for components that are optional, require pinned versions, or need custom config; use `-all` targets otherwise.
+- Prefer targeted updates over running blanket update commands.
 
-### 2. Configure Environment
-Set target distribution and version either via environment variables or a `.env` file:
+## install
 
-```bash
-cp .env.example .env
-# Edit .env to adjust DIST and VERSION (e.g., DIST=debian, VERSION=trixie)
-```
+### automation
 
-Alternatively, export variables directly in your shell:
-```bash
-export DIST=debian
-export VERSION=trixie
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/romainPrignon/dotfiles.git ~/.dotfiles
+   cd ~/.dotfiles
+   ```
+2. Configure distribution and version:
+   ```bash
+   cp .env.example .env
+   # Edit DIST (e.g., debian, ubuntu) and VERSION (e.g., trixie, noble)
+   ```
+3. Run the provisioning pipeline:
+   ```bash
+   make swap size=8G # Optional: create swap
+   make grub         # configure grub
+   make bootstrap    # Create folder hierarchy
+   make install      # Install system packages, runtimes, and CLI tools
+   make configure    # Link dotfiles and configurations
+   make load-desktop # Load dconf settings
+   make checkup      # Verify installed tools
+   sudo reboot       # Apply shell and group changes
+   make clean        # Clean caches
+   ```
 
-### 3. Run the Provisioning Pipeline (in order)
+### manual
 
-- first, clean primary targets to install only what you need
+- Open `chrome://apps/` or `brave://apps/` and install shortcuts (DevDocs, Spotify, YouTube).
+- Launch and log in to Insync.
+- Configure gitmoji:
+  ```bash
+  gitmoji -g
+  ```
+- Link partner configuration if applicable:
+  ```bash
+  make partner partner=<partner-name>
+  ```
 
-| Step | Command | Description |
-|---|---|---|
-| **0. (Optional)** | `make swap` | Set up swap space (recommended for low RAM / cloud VMs) |
-| **1. Bootstrap** | `make bootstrap` | Install base build tools and essential utilities |
-| **2. Install** | `make install` | Install all packages and CLI tools for the target OS |
-| **3. Configure** | `make configure` | Apply configurations and create symlinks |
-| **3. Desktop** | `make load-desktop` | Apply Desktop configurations |
-| **4. Checkup** | `make checkup` | Validate that all tools and configs are working properly |
-| **5. (Optional)** | `make produce` | Install additional developer/power-user tools (producer mode) |
-| **6. Reboot** | `sudo reboot` | Reboot system to ensure all shell/group changes take effect |
-| **7. Clean** | `make clean` | Clean up package caches and temporary install artifacts |
+## routine
 
-## Manual work
-
-### webapp
-- go to chrome://apps/ or brave://apps/
-- install shortcuts:
-    - devdocs
-    - spotify
-    - youtube
-
-## insync
-- launch and configure
-
-## gitmoji
-```bash
-gitmoji -g
-```
----
-
-## 🔄 Routine Maintenance
-
-Keep packages and dotfiles up to date:
-
-```bash
-make update # (not safe)
-```
-
-- prefer targeted updates
+- Run targeted updates: `make update-cli`, `make update-runtime`, `make update-pkger`, `make update-app`.
+- Update all packages: `make update`.
+- Clean package caches and logs: `make clean`.
+- Prune unused mise tools: `make purge`.
 
 ## troubleshooting
 
-### scaling issue
-- either use gnome on xorg at login
-- use wayland but use large resolution and scale down
-
+- **Display scaling**: switch to GNOME on Xorg at login screen, or set a higher resolution and scale down on Wayland.
+- **Verification**: run `make checkup` to validate missing binaries or paths.
 
 ## contribute
 
-TOOD: explain make contribute target
+- Switch to SSH remote (producer mode): `make produce`.
+- Switch to HTTPS remote (consumer mode): `make consume`.
+- Build container test environment: `make build dist=debian version=trixie`.
+- Run container test environment: `make dev dist=debian version=trixie`.
+- Sync files to local VM via SSH: `make sync`.
