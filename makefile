@@ -397,7 +397,7 @@ install-font:
 		fonts-inconsolata \
 		fonts-jetbrains-mono \
 		fonts-liberation \
-		fonts-noto \
+		fonts-noto-mono \
 		fonts-roboto \
 		fonts-symbola \
 		fonts-ubuntu
