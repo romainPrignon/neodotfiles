@@ -300,7 +300,6 @@ install-runtime-docker:
 	sudo usermod -aG docker ${USER}
 	sudo apt update
 	sudo apt install -y docker-buildx-plugin docker-compose-plugin
-	newgrp docker
 
 install-runtime-packer:
 	@echo ====== install-runtime-packer ======
@@ -332,12 +331,12 @@ install-pkger-krew:
 	mise use -g krew@latest
 
 install-pkg-docker:
-	docker pull ${DIST}:${VERSION}
-	docker pull node:lts
-	docker pull node:latest
-	docker pull rust:latest
-	docker pull python:latest
-	docker pull postgres:latest
+	sg docker -c "docker pull ${DIST}:${VERSION}"
+	sg docker -c "docker pull node:lts"
+	sg docker -c "docker pull node:latest"
+	sg docker -c "docker pull rust:latest"
+	sg docker -c "docker pull python:latest"
+	sg docker -c "docker pull postgres:latest"
 
 install-pkg-node:
 	npm install -g \
