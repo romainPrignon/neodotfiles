@@ -72,3 +72,18 @@ Personal workstation provisioning and dotfiles.
 - Build container test environment: `make build dist=debian version=trixie`.
 - Run container test environment: `make dev dist=debian version=trixie`.
 - Sync files to local VM via SSH: `make sync`.
+
+## Specific
+
+### Huawei
+- display 1600x1050
+
+### starlabs starfighter
+- use https://github.com/zb3/gnome-gamma-tool with gnome-gamma-tool.py -b 0.7 -g 0.95
+   - if using x11: xrandr --output eDP-1 --brightness 0.7 --gamma 0.95
+- display 1600x1050, 59,95Hz
+- gnome tweak scaling factor 1,125
+   - can also be 1,0625  if needed
+   explanation: xdpyinfo | grep dots then do 102/96 to find the value or 108/96
+- font are thinner (in vscode and brave and system), font scaling balance that
+- brave: zoom page as needed

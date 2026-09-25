@@ -393,6 +393,7 @@ install-font:
 		fonts-ancient-scripts \
 		fonts-dejavu \
 		fonts-droid-fallback \
+		fonts-font-awesome \
 		fonts-inconsolata \
 		fonts-jetbrains-mono \
 		fonts-liberation \
