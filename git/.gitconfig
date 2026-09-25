@@ -4,7 +4,13 @@
 [user]
     name = romainprignon
     email = pro.rprignon@gmail.com
-	signingkey = B5D18794410CBF8E
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
 
 [alias]
     tags = tag -l
@@ -90,10 +96,15 @@
     # find orphans
     orphans = fsck --full
 
+[commit]
+	gpgsign = true
+
 [branch]
     sort = -committerdate
+
 [tag]
     sort = version:refname
+    gpgsign = true
 
 [core]
     excludesfile = ~/.gitignore

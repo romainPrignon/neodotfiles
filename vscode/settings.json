@@ -217,7 +217,6 @@
     },
     // extensions
     "eslint.run": "onSave",
-    "ruff.lint.run": "onSave",
     "macros.list": {
         "comment": [
             "editor.action.commentLine",
@@ -782,5 +781,13 @@
     },
     // a retester plus tard
     "terminal.integrated.suggest.enabled": false,
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
     // ranger
 }
